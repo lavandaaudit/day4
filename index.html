@@ -11,9 +11,12 @@
     <style>
         :root {
             --bg-deep: #020205;
-            --accent-pri: #0f8; /* Chemical Green */
-            --accent-sec: #0cf; /* Liquid Blue */
-            --accent-warn: #f40; /* Reaction Red */
+            --accent-pri: #0f8;
+            /* Chemical Green */
+            --accent-sec: #0cf;
+            /* Liquid Blue */
+            --accent-warn: #f40;
+            /* Reaction Red */
             --white: #eef;
             --glass-panel: rgba(5, 10, 15, 0.8);
             --border-subtle: rgba(0, 255, 150, 0.1);
@@ -115,7 +118,7 @@
             backdrop-filter: blur(10px);
             padding: 14px;
             border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .card-h {
@@ -139,31 +142,76 @@
             border-bottom: 1px solid rgba(0, 255, 120, 0.05);
         }
 
-        .m-lbl { color: #8aa; font-size: 9px; }
-        .m-val { color: #fff; font-weight: bold; font-size: 11px; }
-        .m-inf { display: block; font-size: 8px; color: #577; margin-top: 2px; }
+        .m-lbl {
+            color: #8aa;
+            font-size: 9px;
+        }
+
+        .m-val {
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 0 0 10px rgba(0, 255, 150, 0.3);
+        }
+
+        .m-inf {
+            display: block;
+            font-size: 8px;
+            color: #577;
+            margin-top: 2px;
+        }
 
         /* CHEM GRID */
         .chem-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 12px;
         }
 
         .c-item {
             background: rgba(0, 255, 150, 0.03);
-            padding: 8px;
-            border: 1px solid transparent;
+            padding: 12px;
+            border: 1px solid rgba(0, 255, 150, 0.1);
             transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .c-item:hover {
-            border-color: var(--accent-pri);
-            background: rgba(0, 255, 150, 0.08);
+        .c-item.alert {
+            border-color: var(--accent-warn);
+            background: rgba(255, 60, 0, 0.1);
+            animation: pulse-alert 2s infinite;
         }
 
-        .c-head { font-size: 8px; color: #688; margin-bottom: 4px; display: flex; justify-content: space-between; }
-        .c-score { font-size: 18px; font-weight: bold; color: #fff; }
+        @keyframes pulse-alert {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 60, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 60, 0, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(255, 60, 0, 0.2);
+            }
+        }
+
+        .c-head {
+            font-size: 9px;
+            color: #688;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        .c-score {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -1px;
+        }
 
         /* CENTER VISUAL */
         canvas#chem-visual {
@@ -181,14 +229,20 @@
         }
 
         .big-idx {
-            font-size: 52px;
-            font-weight: 200;
+            font-size: 82px;
+            font-weight: 100;
             color: #fff;
-            text-shadow: 0 0 30px var(--accent-pri);
+            text-shadow: 0 0 40px var(--accent-pri);
             line-height: 1;
+            margin-bottom: 10px;
         }
 
-        .idx-lbl { color: var(--accent-pri); font-size: 11px; letter-spacing: 3px; font-weight: bold; }
+        .idx-lbl {
+            color: var(--accent-pri);
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
 
         /* LOGS */
         .log-box {
@@ -199,25 +253,56 @@
             overflow-y: auto;
         }
 
-        .log-entry { margin-bottom: 5px; padding-left: 8px; border-left: 1px solid #1a2a24; }
-        .log-time { color: #466; margin-right: 6px; }
+        .log-entry {
+            margin-bottom: 5px;
+            padding-left: 8px;
+            border-left: 1px solid #1a2a24;
+        }
+
+        .log-time {
+            color: #466;
+            margin-right: 6px;
+        }
 
         /* MOBILE ADAPTATION */
         @media (max-width: 1024px) {
-            body { overflow-y: auto; height: auto; }
+            body {
+                overflow-y: auto;
+                height: auto;
+            }
+
             .app-container {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
                 height: auto;
                 padding: 15px;
             }
-            .col-center { height: 400px; order: -1; }
-            .col-left, .col-right { order: 1; height: auto; overflow: visible; }
-            .big-idx { font-size: 38px; }
+
+            .col-center {
+                height: 400px;
+                order: -1;
+            }
+
+            .col-left,
+            .col-right {
+                order: 1;
+                height: auto;
+                overflow: visible;
+            }
+
+            .big-idx {
+                font-size: 38px;
+            }
         }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #043; border-radius: 2px; }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #043;
+            border-radius: 2px;
+        }
     </style>
 </head>
 
@@ -302,17 +387,20 @@
                     Сканування глобальних хімічних маркерів...
                 </div>
                 <div style="height:2px; width:100%; background:#1a2a24; margin-top:10px;">
-                    <div style="height:100%; width:0%; background:var(--accent-pri); transition:width 1s;" id="calc-progress"></div>
+                    <div style="height:100%; width:0%; background:var(--accent-pri); transition:width 1s;"
+                        id="calc-progress"></div>
                 </div>
             </div>
 
             <div class="card" style="flex:1; display:flex; flex-direction:column;">
                 <div class="card-h"><span>ЖУРНАЛ СИНТЕЗУ (LOG)</span></div>
                 <div class="log-box" id="chem-log"></div>
-                
-                <div style="margin-top:auto; padding-top:15px; border-top:1px solid #1a2a24; font-size:8px; color:#577; line-height:1.5;">
+
+                <div
+                    style="margin-top:auto; padding-top:15px; border-top:1px solid #1a2a24; font-size:8px; color:#577; line-height:1.5;">
                     <b style="color:var(--accent-sec);">CHEM-CORE v.2.6:</b><br>
-                    Агрегація даних з 1400+ станцій моніторингу атмосфери (WAQI) та супутникових даних ESA/Copernicus для моделювання біо-геохімічних циклів земної системи.
+                    Агрегація даних з 1400+ станцій моніторингу атмосфери (WAQI) та супутникових даних ESA/Copernicus
+                    для моделювання біо-геохімічних циклів земної системи.
                 </div>
             </div>
         </div>
@@ -346,40 +434,40 @@
 
         async function fetchChemicalData() {
             updateUIStart();
-            
+
             try {
                 // Приклад реального API (WAQI) для атмосфери (використовуємо 'here' для локації або 'global' для середнього)
                 // Для демо використовуємо публічний токен або імітуємо на основі патернів
                 const res = await fetch('https://api.waqi.info/feed/here/?token=demo');
                 const data = await res.json();
-                
+
                 let waqi = data.status === 'ok' ? data.data.aqi : 50;
                 let city = data.status === 'ok' ? data.data.city.name : 'Global';
 
                 // Моделювання 6 категорій
                 const now = Date.now();
-                
+
                 // 1. АТМОСФЕРА (на основі реальних даних)
-                STATE.cats.atmo = clamp(waqi * 0.8 + (Math.random()-0.5)*10, 10, 100);
-                
+                STATE.cats.atmo = clamp(waqi * 0.8 + (Math.random() - 0.5) * 10, 10, 100);
+
                 // 2. ОКЕАН (симуляція pH 8.1 - 7.9)
-                STATE.cats.marine = 8.1 - (waqi/1000) + (Math.sin(now/100000)*0.05);
-                
+                STATE.cats.marine = 8.1 - (waqi / 1000) + (Math.sin(now / 100000) * 0.05);
+
                 // 3. АЕРОЗОЛІ
-                STATE.cats.aerosol = clamp(waqi * 1.2 + (Math.random()-0.5)*15, 5, 200);
-                
+                STATE.cats.aerosol = clamp(waqi * 1.2 + (Math.random() - 0.5) * 15, 5, 200);
+
                 // 4. ПАРНИКОВІ (CO2 тренд ~420ppm)
-                STATE.cats.green = 418 + (Math.random()*5) + (Math.sin(now/50000)*2);
-                
+                STATE.cats.green = 418 + (Math.random() * 5) + (Math.sin(now / 50000) * 2);
+
                 // 5. БІО-ЦИКЛ (Стабільність циклів)
-                STATE.cats.bio = 75 + (Math.random()-0.5)*20;
-                
+                STATE.cats.bio = 75 + (Math.random() - 0.5) * 20;
+
                 // 6. ТЕХНО-СЛІД
                 STATE.cats.tech = clamp(waqi / 2 + 30, 0, 100);
 
                 // Загальний індекс GCI (чим вищий, тим "брудніша/активніша" хімія)
                 // 0 - ідеальний баланс, 100 - критичне навантаження
-                const gci = (STATE.cats.atmo*0.2 + (8.1-STATE.cats.marine)*500 + STATE.cats.aerosol/2 + (STATE.cats.green-400)*2) / 4;
+                const gci = (STATE.cats.atmo * 0.2 + (8.1 - STATE.cats.marine) * 500 + STATE.cats.aerosol / 2 + (STATE.cats.green - 400) * 2) / 4;
                 STATE.index = clamp(gci, 10, 95);
 
                 log(`Оновлено дані: ${city}. AQI: ${waqi}. Індекс GCI: ${STATE.index.toFixed(1)}`);
@@ -393,7 +481,7 @@
 
         function simulateData() {
             const rnd = () => Math.random() * 100;
-            STATE.cats.atmo = 45 + Math.random()*15;
+            STATE.cats.atmo = 45 + Math.random() * 15;
             STATE.cats.marine = 8.07;
             STATE.cats.aerosol = 32;
             STATE.cats.green = 421;
@@ -422,11 +510,11 @@
             `).join('');
 
             // Particles init
-            for(let i=0; i<40; i++) {
+            for (let i = 0; i < 40; i++) {
                 STATE.particles.push({
-                    x: Math.random(), y: Math.random(), 
-                    vx: (Math.random()-0.5)*0.001, vy: (Math.random()-0.5)*0.001,
-                    r: Math.random()*3+1
+                    x: Math.random(), y: Math.random(),
+                    vx: (Math.random() - 0.5) * 0.001, vy: (Math.random() - 0.5) * 0.001,
+                    r: Math.random() * 3 + 1
                 });
             }
 
@@ -449,10 +537,10 @@
             const idx = STATE.index;
             document.getElementById('main-idx').innerText = idx.toFixed(1);
             document.getElementById('main-idx').style.color = idx > 70 ? 'var(--accent-warn)' : 'var(--accent-pri)';
-            
+
             document.getElementById('v-atmo').innerText = STATE.cats.atmo.toFixed(1);
             document.getElementById('v-ph').innerText = STATE.cats.marine.toFixed(3);
-            document.getElementById('v-ent').innerText = (idx/15).toFixed(2);
+            document.getElementById('v-ent').innerText = (idx / 15).toFixed(2);
             document.getElementById('v-carb').innerText = STATE.cats.green.toFixed(1);
 
             document.getElementById('val-atmo').innerText = STATE.cats.atmo.toFixed(0);
@@ -462,13 +550,23 @@
             document.getElementById('val-bio').innerText = STATE.cats.bio.toFixed(0);
             document.getElementById('val-tech').innerText = STATE.cats.tech.toFixed(0);
 
+            // Alert Class Toggle
+            CHEM_CATEGORIES.forEach(c => {
+                const el = document.getElementById(`val-${c.id}`).parentElement;
+                const isHigh = (c.id === 'atmo' && STATE.cats.atmo > 80) ||
+                    (c.id === 'marine' && STATE.cats.marine < 8.0) ||
+                    (c.id === 'aerosol' && STATE.cats.aerosol > 100);
+                if (isHigh) el.classList.add('alert');
+                else el.classList.remove('alert');
+            });
+
             // Narrative
             let desc = "";
             let analysis = "";
-            if(idx < 40) { desc = "ХІМІЧНИЙ СПОКІЙ. Біосферні цикли працюють в режимі саморегуляції."; analysis = "Маркери оксидантів нижче норми. Океанічний буфер стабільний."; }
-            else if(idx < 60) { desc = "ПОМІРНА АКТИВНІСТЬ. Спостерігається техногенний фон середньої інтенсивності."; analysis = "Зростання концентрації аерозолів у промислових хабах. Стабільний дрейф pH."; }
+            if (idx < 40) { desc = "ХІМІЧНИЙ СПОКІЙ. Біосферні цикли працюють в режимі саморегуляції."; analysis = "Маркери оксидантів нижче норми. Океанічний буфер стабільний."; }
+            else if (idx < 60) { desc = "ПОМІРНА АКТИВНІСТЬ. Спостерігається техногенний фон середньої інтенсивності."; analysis = "Зростання концентрації аерозолів у промислових хабах. Стабільний дрейф pH."; }
             else { desc = "СИСТЕМНИЙ ПЕРЕГРІВ. Критичне навантаження на хімічні фільтри планети."; analysis = "Детектовано викиди метану. Кислотність океану наближається до рекордної позначки."; }
-            
+
             document.getElementById('main-desc').innerText = desc;
             document.getElementById('chem-analysis').innerText = analysis;
 
@@ -479,62 +577,95 @@
         function anim() {
             const w = can.width = can.clientWidth;
             const h = can.height = can.clientHeight;
-            ctx.clearRect(0,0,w,h);
+            ctx.clearRect(0, 0, w, h);
 
-            const cx = w/2;
-            const cy = h/2;
-            const scale = Math.min(w,h)*0.35;
-
-            // DRAW MOLECULAR GRAPH (The real-time analytic graph)
-            ctx.strokeStyle = 'rgba(0, 255, 150, 0.15)';
-            ctx.lineWidth = 1;
-
+            const cx = w / 2;
+            const cy = h / 2;
+            const scale = Math.min(w, h) * 0.38;
             const time = Date.now() * 0.001;
-            const points = [];
-            const count = 12;
+            const isCritical = STATE.index > 70;
 
-            for(let i=0; i<count; i++) {
-                const angle = (i / count) * Math.PI * 2 + time * 0.2;
-                const r = scale * (0.8 + Math.sin(time + i)*0.1);
-                const x = cx + Math.cos(angle) * r;
-                const y = cy + Math.sin(angle) * r;
-                points.push({x, y});
+            // DRAW REACTIVE CHEMICAL CLOUD
+            ctx.filter = isCritical ? 'blur(10px) brightness(1.5)' : 'blur(20px)';
+            for (let i = 0; i < 5; i++) {
+                const angle = time * (0.2 + i * 0.1);
+                const rx = Math.cos(angle) * (scale * 0.3);
+                const ry = Math.sin(angle * 1.2) * (scale * 0.2);
+
+                const grad = ctx.createRadialGradient(cx + rx, cy + ry, 10, cx + rx, cy + ry, scale * 0.8);
+                const baseColor = isCritical ? 'rgba(255, 50, 0, 0.15)' : 'rgba(0, 255, 150, 0.1)';
+                grad.addColorStop(0, baseColor);
+                grad.addColorStop(1, 'transparent');
+
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(cx + rx, cy + ry, scale, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.filter = 'none';
+
+            // MOLECULAR FLOW (Lines & Nodes)
+            const count = isCritical ? 24 : 16;
+            const points = [];
+            for (let i = 0; i < count; i++) {
+                const phase = (i / count) * Math.PI * 2;
+                const distMultiplier = 0.8 + Math.sin(time + i * 0.5) * 0.1;
+                const r = scale * distMultiplier;
+                const x = cx + Math.cos(phase + time * 0.15) * r;
+                const y = cy + Math.sin(phase + time * 0.15) * r;
+                points.push({ x, y, i });
             }
 
-            // Central Nucleus
-            const nucR = 40 + Math.sin(time*2) * 5;
+            // Central Reactance
+            const pulse = 1 + Math.sin(time * 5) * 0.05 * (STATE.index / 50);
             ctx.beginPath();
-            ctx.arc(cx, cy, nucR, 0, Math.PI*2);
-            ctx.fillStyle = 'rgba(0, 255, 150, 0.05)';
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(0, 255, 150, 0.3)';
+            ctx.arc(cx, cy, 50 * pulse, 0, Math.PI * 2);
+            ctx.strokeStyle = isCritical ? 'rgba(255, 50, 0, 0.5)' : 'rgba(0, 255, 150, 0.3)';
+            ctx.setLineDash([5, 5]);
             ctx.stroke();
+            ctx.setLineDash([]);
 
-            // Connections
+            // Chemical Bonding
+            ctx.lineWidth = 0.8;
             points.forEach((p, i) => {
+                // Link to center
                 ctx.beginPath();
                 ctx.moveTo(cx, cy);
                 ctx.lineTo(p.x, p.y);
+                ctx.strokeStyle = isCritical ? 'rgba(255, 60, 0, 0.1)' : 'rgba(0, 255, 150, 0.05)';
                 ctx.stroke();
 
-                // Atom
+                // Link neighbors
+                const next = points[(i + 1) % count];
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, 4, 0, Math.PI*2);
-                ctx.fillStyle = i % 3 === 0 ? 'var(--accent-pri)' : 'var(--accent-sec)';
-                ctx.fill();
-                
-                // Outer ring
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 10 + Math.sin(time*3+i)*4, 0, Math.PI*2);
-                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(next.x, next.y);
+                ctx.strokeStyle = isCritical ? 'rgba(255, 100, 0, 0.4)' : 'rgba(0, 255, 150, 0.2)';
                 ctx.stroke();
+
+                // Electrons/Atoms
+                const glow = 5 + Math.sin(time * 10 + i) * 3;
+                ctx.shadowBlur = glow;
+                ctx.shadowColor = isCritical ? '#f30' : '#0f9';
+                ctx.fillStyle = isCritical ? '#f50' : '#0fa';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, isCritical ? 5 : 3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
             });
 
-            // Molecular orbit
-            ctx.beginPath();
-            ctx.ellipse(cx, cy, scale*1.2, scale*0.4, time*0.1, 0, Math.PI*2);
-            ctx.strokeStyle = 'rgba(0, 200, 255, 0.1)';
-            ctx.stroke();
+            // ALERT OVERLAYS
+            if (isCritical && Math.floor(time * 2) % 2 === 0) {
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.03)';
+                ctx.fillRect(0, 0, w, h);
+
+                ctx.strokeStyle = 'rgba(255, 0, 0, 0.3)';
+                ctx.strokeRect(10, 10, w - 20, h - 20);
+
+                ctx.fillStyle = '#f00';
+                ctx.font = 'bold 10px Space Mono';
+                ctx.fillText("CRITICAL REACTION DETECTED", cx - 80, 40);
+            }
 
             requestAnimationFrame(anim);
         }
@@ -543,10 +674,10 @@
             const box = document.getElementById('chem-log');
             const d = document.createElement('div');
             d.className = 'log-entry';
-            const t = new Date().toLocaleTimeString('uk-UA', {hour12:false});
+            const t = new Date().toLocaleTimeString('uk-UA', { hour12: false });
             d.innerHTML = `<span class="log-time">[${t}]</span> ${msg}`;
             box.prepend(d);
-            if(box.children.length > 15) box.lastChild.remove();
+            if (box.children.length > 15) box.lastChild.remove();
         }
 
         function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
@@ -556,14 +687,14 @@
         const bgCtx = bgC.getContext('2d');
         function animBg() {
             bgC.width = innerWidth; bgC.height = innerHeight;
-            bgCtx.clearRect(0,0,innerWidth, innerHeight);
+            bgCtx.clearRect(0, 0, innerWidth, innerHeight);
             STATE.particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > 1) p.vx *= -1;
-                if(p.y < 0 || p.y > 1) p.vy *= -1;
+                if (p.x < 0 || p.x > 1) p.vx *= -1;
+                if (p.y < 0 || p.y > 1) p.vy *= -1;
                 bgCtx.fillStyle = 'rgba(0, 255, 150, 0.3)';
                 bgCtx.beginPath();
-                bgCtx.arc(p.x * innerWidth, p.y * innerHeight, p.r, 0, Math.PI*2);
+                bgCtx.arc(p.x * innerWidth, p.y * innerHeight, p.r, 0, Math.PI * 2);
                 bgCtx.fill();
             });
             requestAnimationFrame(animBg);
